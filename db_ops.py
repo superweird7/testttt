@@ -6,10 +6,29 @@ import subprocess
 import os
 from datetime import datetime
 import configparser
+import sys # <-- ADDED IMPORT
 
-# --- Read Database Configuration from config.ini ---
+def get_base_path():
+    """ Get the correct base path whether running as a script or a frozen exe."""
+    if getattr(sys, 'frozen', False):
+        return os.path.dirname(sys.executable)
+    else:
+        return os.path.dirname(os.path.abspath(__file__))
+
+# --- New Debugging Code ---
 config = configparser.ConfigParser()
-config.read('config.ini')
+config_path = os.path.join(get_base_path(), 'config.ini')
+
+# --- TEMPORARY DEBUGGING CODE ---
+# This will print the path to the console so we can see it.
+print(f"DEBUG: Looking for config file at: {config_path}")
+if not os.path.exists(config_path):
+    print("DEBUG: ERROR - config.ini does NOT exist at this path!")
+else:
+    print("DEBUG: SUCCESS - config.ini found!")
+# --- END DEBUGGING CODE ---
+
+config.read(config_path)
 
 DB_CONFIG = dict(
     host=config.get('database', 'host'),

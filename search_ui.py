@@ -1,7 +1,7 @@
 ﻿# search_ui.py
 from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, QTableWidget, QTableWidgetItem,
-    QMessageBox, QDialog, QTextEdit, QStatusBar, QHBoxLayout, QGridLayout, QComboBox
+    QMessageBox, QDialog, QTextEdit, QStatusBar, QHBoxLayout
 )
 from PyQt5.QtCore import Qt
 import db_ops
@@ -35,7 +35,7 @@ class SearchWindow(QWidget):
 
         # --- Results Table ---
         self.table = QTableWidget()
-        self.table.verticalHeader().setVisible(False) # <-- ADD THIS LINE
+        self.table.verticalHeader().setVisible(False)
         self.table.setColumnCount(10)
         self.table.setHorizontalHeaderLabels(["ID", "التاريخ", "النوع", "الجهاز", "الفني", "الإجراءات", "المواد", "ملاحظات", "التحذيرات", "القسم"])
         self.table.cellDoubleClicked.connect(self.show_full_details)
